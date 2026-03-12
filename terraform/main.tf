@@ -7,6 +7,7 @@ provider "kubernetes" {
 }
 
 resource "kubernetes_namespace_v1" "rag" {
+  depends_on = [module.kubernetes_cluster]
   metadata {
     name = "rag"
   }
@@ -14,4 +15,12 @@ resource "kubernetes_namespace_v1" "rag" {
 
 module "qdrant" {
   source = "./modules/qdrant"
+  depends_on = [kubernetes_namespace_v1.rag]
+
+}
+
+module "ollama" {
+  source = "./modules/ollama"
+  depends_on = [kubernetes_namespace_v1.rag]
+
 }
