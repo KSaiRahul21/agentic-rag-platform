@@ -12,15 +12,3 @@ resource "kubernetes_namespace_v1" "rag" {
     name = "rag"
   }
 }
-
-module "qdrant" {
-  source = "./modules/qdrant"
-  depends_on = [kubernetes_namespace_v1.rag]
-
-}
-
-module "ollama" {
-  source = "./modules/ollama"
-  depends_on = [kubernetes_namespace_v1.rag]
-
-}
