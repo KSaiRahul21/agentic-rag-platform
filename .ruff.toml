@@ -1,0 +1,8 @@
+# Ruff configuration (PEP 8 compliant)
+line-length = 79
+
+# Optional: you can include other stylistic rules
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false

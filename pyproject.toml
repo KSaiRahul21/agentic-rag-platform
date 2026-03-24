@@ -13,3 +13,50 @@ dependencies = [
     "sentence-transformers>=5.1.2",
     "uvicorn>=0.39.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0,<5",
+    "ruff>=0.11.7,<0.12",
+    "commitizen>=4.6.0,<5",
+    "codespell==2.3.0",
+    "tomli",
+    "pytest",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.26,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py39"
+
+[tool.isort]
+line_length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "E9", "F63", "F7", "F82", "Q0", "N801", "I"]
+ignore = [
+    "E741", # allow ambiguous variable names
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+lines-after-imports = 2
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "semver"
+version_provider = "uv"
+update_changelog_on_bump = true
+
+[tool.codespell]
+ignore-words-list = "crate,nd,strack,dota,ane,segway,fo,gool,winn,commend"
+skip = "*.ipynb,uv.lock,*.csv,*venv,docs/??/,docs/mkdocs_??.yml"

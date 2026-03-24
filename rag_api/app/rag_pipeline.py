@@ -1,8 +1,7 @@
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 import requests
-from qdrant_client.models import ScoredPoint
-from qdrant_client.models import VectorParams, Distance, ScoredPoint
+from qdrant_client.models import VectorParams, Distance
 
 
 # -----------------------------
@@ -27,6 +26,7 @@ documents = [
     "Ollama allows running LLMs locally.",
 ]
 
+
 # -----------------------------
 # Create collection
 # -----------------------------
@@ -35,11 +35,12 @@ def create_collection():
     existing = [c.name for c in qdrant.get_collections().collections]
     if COLLECTION_NAME in existing:
         qdrant.delete_collection(COLLECTION_NAME)
-    
+
     qdrant.create_collection(
         collection_name=COLLECTION_NAME,
-        vectors_config=VectorParams(size=384, distance=Distance.COSINE)
+        vectors_config=VectorParams(size=384, distance=Distance.COSINE),
     )
+
 
 # -----------------------------
 # Insert documents
@@ -59,15 +60,14 @@ def insert_documents():
         ],
     )
 
+
 # -----------------------------
 # Query RAG
 # -----------------------------
 def query_rag(query):
     query_vector = embedder.encode(query).tolist()
     hits = qdrant.query_points(
-        collection_name=COLLECTION_NAME,
-        query=query_vector,
-        limit=2
+        collection_name=COLLECTION_NAME, query=query_vector, limit=2
     ).points
 
     context = "\n".join([hit.payload["text"] for hit in hits])
@@ -95,6 +95,7 @@ def query_rag(query):
         raise ValueError(f"Unexpected Ollama response: {data}")
 
     return data["response"]
+
 
 # -----------------------------
 # Run pipeline

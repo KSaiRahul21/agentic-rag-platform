@@ -22,7 +22,7 @@ kubectl get pods -n rag
 
 ### Deploy Ollama via kubectl (LLM inference)
 
-Create a local volume for persistance, I used the following path, you can adjust the deployment manifest accordingly if needed
+Create a local volume for persistence, I used the following path, you can adjust the deployment manifest accordingly if needed
 ```bash
 mkdir -p /Users/kwr/ollama-models
 ```
@@ -30,7 +30,7 @@ Deploy Ollama into K8s
 ```bash
 kubectl apply -f terraform/k8s/ollama.yaml
 ```
-This also adds Volume Persistance
+This also adds Volume persistence
 ```
 /Users/kwr/ollama-models  (local path)
   └── /var/ollama-models  (kind container, via extraMounts)
