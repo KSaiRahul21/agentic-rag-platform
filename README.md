@@ -116,3 +116,9 @@ kubectl port-forward svc/qdrant 6333:6333 -n rag
 kubectl port-forward svc/ollama 11434:11434 -n rag
 
 ```
+
+To run the code, execute
+
+```bash
+python rag_api/app/rag_pipeline.py
+```
