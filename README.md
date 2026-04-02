@@ -55,6 +55,7 @@ kubectl --namespace rag port-forward $POD_NAME 6333:6333
 curl 127.0.0.1:6333
 ```
 
+
 ## Shutdown Infrastructure
 
 ```bash
